@@ -9,7 +9,7 @@ for gx in range(system.grid[0]):
         if 40 <= gx <= 60 and 40 <= gy <= 60:
             element.temperature = 500
 
-for i in range(100):
+for i in range(2):
     for gx in range(system.grid[0]):
         for gy in range(system.grid[1]):
             element = system.elements[gx][gy]
