@@ -16,37 +16,43 @@ class System:
         diffusions = [[0 for gy in range(self.grid[1])] for gx in range(self.grid[0])]
         for gx in range(self.grid[0]):
             for gy in range(self.grid[1]):
-                diffusion = 0
                 element = self.elements[gx][gy]
                 if gx > 0:
-                    diffusion += element.get_diffusion(
+                    diffusion = element.get_diffusion(
                         self.elements[gx - 1][gy],
                         area=self.size[1] / self.grid[1],
                         distance=self.size[0] / self.grid[0],
                         delta_time=delta_time
                     )
+                    diffusions[gx][gy] += diffusion
+                    diffusions[gx - 1][gy] -= diffusion
                 if gx < self.grid[0] - 1:
-                    diffusion += element.get_diffusion(
+                    diffusion = element.get_diffusion(
                         self.elements[gx + 1][gy],
                         area=self.size[1] / self.grid[1],
                         distance=self.size[0] / self.grid[0],
                         delta_time=delta_time
                     )
+                    diffusions[gx][gy] += diffusion
+                    diffusions[gx + 1][gy] -= diffusion
                 if gy > 0:
-                    diffusion += element.get_diffusion(
+                    diffusion = element.get_diffusion(
                         self.elements[gx][gy - 1],
                         area=self.size[0] / self.grid[0],
                         distance=self.size[1] / self.grid[1],
                         delta_time=delta_time
                     )
+                    diffusions[gx][gy] += diffusion
+                    diffusions[gx][gy - 1] -= diffusion
                 if gy < self.grid[1] - 1:
-                    diffusion += element.get_diffusion(
+                    diffusion = element.get_diffusion(
                         self.elements[gx][gy + 1],
                         area=self.size[0] / self.grid[0],
                         distance=self.size[1] / self.grid[1],
                         delta_time=delta_time
                     )
-                diffusions[gx][gy] = diffusion
+                    diffusions[gx][gy] += diffusion
+                    diffusions[gx][gy + 1] -= diffusion
         for gx in range(self.grid[0]):
             for gy in range(self.grid[1]):
                 self.elements[gx][gy].temperature += diffusions[gx][gy]
