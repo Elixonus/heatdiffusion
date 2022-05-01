@@ -17,16 +17,18 @@ def render(*, systems: list[System], times: list[float]) -> None:
         conductivities.append(conductivity)
 
     for t, conductivity in reversed(list(enumerate(conductivities))):
+        size = systems[t].size
         fig, ax = plt.subplots()
-        im = ax.imshow(conductivity, origin="lower")
+        im = ax.imshow(conductivity, origin="lower", extent=(0, size[0], 0, size[1]), interpolation="bicubic")
         ax.set_title(f"Map of conductivity coefficients at time t={times[t]:.4f} sec")
         ax.set_xlabel("Horizontal displacement (meters)")
         ax.set_ylabel("Vertical displacement (meters)")
         cbar = plt.colorbar(im)
         cbar.set_label("Conductivity coefficient")
     for t, temperature in reversed(list(enumerate(temperatures))):
+        size = systems[t].size
         fig, ax = plt.subplots()
-        im = ax.imshow(temperature, origin="lower")
+        im = ax.imshow(temperature, origin="lower", extent=(0, size[0], 0, size[1]), cmap="magma", interpolation="bicubic")
         ax.set_title(f"Map of temperatures at time t={times[t]:.4f} sec")
         ax.set_xlabel("Horizontal displacement (meters)")
         ax.set_ylabel("Vertical displacement (meters)")
