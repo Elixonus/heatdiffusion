@@ -2,68 +2,34 @@ import matplotlib.pyplot as plt
 from heatdiff import System
 
 
-def render(*, system_start: System, system_end: System, show_temperature_start: bool, show_conductivity_start: bool) -> None:
-    temperature_start = [[system_start.elements[x][y].temperature
-                          for y in range(system_start.grid[1])]
-                         for x in range(system_start.grid[0])]
-    conductivity_start = [[system_start.elements[x][y].conductivity
-                           for y in range(system_start.grid[1])]
-                          for x in range(system_start.grid[0])]
-    temperature_end = [[system_end.elements[x][y].temperature
-                        for y in range(system_end.grid[1])]
-                       for x in range(system_end.grid[0])]
-    conductivity_end = [[system_start.elements[x][y].conductivity
-                         for y in range(system_start.grid[1])]
-                        for x in range(system_start.grid[0])]
+def render(*, systems: list[System], times: list[float]) -> None:
+    temperatures = []
+    for system in systems:
+        temperature = [[system.elements[x][y].temperature
+                        for y in range(system.grid[1])]
+                       for x in range(system.grid[0])]
+        temperatures.append(temperature)
+    conductivities = []
+    for system in systems:
+        conductivity = [[system.elements[x][y].conductivity
+                         for y in range(system.grid[1])]
+                        for x in range(system.grid[0])]
+        conductivities.append(conductivity)
 
-    if not show_conductivity_start:
+    for t, conductivity in reversed(list(enumerate(conductivities))):
         fig, ax = plt.subplots()
-        im = ax.imshow(conductivity_start, origin="lower")
-        ax.set_title("Map of conductivity coefficients")
+        im = ax.imshow(conductivity, origin="lower")
+        ax.set_title(f"Map of conductivity coefficients at time t={times[t]:.4f} sec")
         ax.set_xlabel("Horizontal displacement (meters)")
         ax.set_ylabel("Vertical displacement (meters)")
         cbar = plt.colorbar(im)
         cbar.set_label("Conductivity coefficient")
-    else:
+    for t, temperature in reversed(list(enumerate(temperatures))):
         fig, ax = plt.subplots()
-        im = ax.imshow(conductivity_end, origin="lower")
-        ax.set_title("Map of ending conductivity coefficients")
-        ax.set_xlabel("Horizontal displacement (meters)")
-        ax.set_ylabel("Vertical displacement (meters)")
-        cbar = plt.colorbar(im)
-        cbar.set_label("Conductivity coefficient")
-
-        fig, ax = plt.subplots()
-        im = ax.imshow(conductivity_start, origin="lower")
-        ax.set_title("Map of starting conductivity coefficients")
-        ax.set_xlabel("Horizontal displacement (meters)")
-        ax.set_ylabel("Vertical displacement (meters)")
-        cbar = plt.colorbar(im)
-        cbar.set_label("Conductivity coefficient")
-
-    if not show_temperature_start:
-        fig, ax = plt.subplots()
-        im = ax.imshow(temperature_end, origin="lower")
-        ax.set_title("Map of temperatures")
+        im = ax.imshow(temperature, origin="lower")
+        ax.set_title(f"Map of temperatures at time t={times[t]:.4f} sec")
         ax.set_xlabel("Horizontal displacement (meters)")
         ax.set_ylabel("Vertical displacement (meters)")
         cbar = plt.colorbar(im)
         cbar.set_label("Temperature (Kelvin)")
-    else:
-        fig, ax = plt.subplots()
-        im = ax.imshow(temperature_end, origin="lower")
-        ax.set_title("Map of ending temperatures")
-        ax.set_xlabel("Horizontal displacement (meters)")
-        ax.set_ylabel("Vertical displacement (meters)")
-        cbar = plt.colorbar(im)
-        cbar.set_label("Temperature (Kelvin)")
-
-        fig, ax = plt.subplots()
-        im = ax.imshow(temperature_start, origin="lower")
-        ax.set_title("Map of starting temperatures")
-        ax.set_xlabel("Horizontal displacement (meters)")
-        ax.set_ylabel("Vertical displacement (meters)")
-        cbar = plt.colorbar(im)
-        cbar.set_label("Temperature (Kelvin)")
-
     plt.show()

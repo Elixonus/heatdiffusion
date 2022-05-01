@@ -27,7 +27,5 @@ for i in range(100):
     system.diffuse(delta_time=0.001)
 
 
-render(system_start=system_start,
-       system_end=system,
-       show_temperature_start=False,
-       show_conductivity_start=False)
+render(systems=[system_start, system],
+       times=[0, 100 * 0.001])
