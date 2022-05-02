@@ -1,17 +1,20 @@
 from __future__ import annotations
 from math import hypot
+from copy import deepcopy
 
 
 class System:
     elements: list[list[Element]]
     grid: tuple[int, int]
     size: tuple[float, float]
+    time: float
 
     def __init__(self, grid: tuple[int, int], size: tuple[float, float], temperature: float,
                  conductivity: float) -> None:
         self.elements = [[Element(temperature, conductivity) for gy in range(grid[1])] for gx in range(grid[0])]
         self.grid = grid
         self.size = size
+        self.time = 0
 
     def diffuse(self, delta_time: float) -> None:
         diffusions = [[0 for gy in range(self.grid[1])] for gx in range(self.grid[0])]
@@ -57,6 +60,15 @@ class System:
         for gx in range(self.grid[0]):
             for gy in range(self.grid[1]):
                 self.elements[gx][gy].temperature += diffusions[gx][gy]
+        self.time += delta_time
+
+    def diffusions(self, steps: int, delta_time: float) -> None:
+        for n in range(steps):
+            self.diffuse(delta_time)
+
+    def diffuses(self, time: float, steps: int) -> None:
+        delta_time = time / steps
+        self.diffusions(steps, delta_time)
 
     def square(self, center: tuple[float, float], size: float, temperature: float = None, conductivity: float = None) -> None:
         self.rectangle(center, (size, size), temperature, conductivity)
@@ -92,6 +104,9 @@ class System:
                         element.temperature = temperature
                     if conductivity is not None:
                         element.conductivity = conductivity
+
+    def save(self) -> System:
+        return deepcopy(self)
 
 
 class Element:
