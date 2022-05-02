@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from heatdiff import System
+from heatdiffusion import System
 
 
 def render(*, systems: list[System], show_conductivity: bool) -> None:
