@@ -133,4 +133,6 @@ class Element:
 
 
 if __name__ == "__main__":
+    from time import sleep
     print("Sorry, this is a library utility file that does not work on its own.")
+    sleep(5)

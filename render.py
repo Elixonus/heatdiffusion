@@ -41,4 +41,6 @@ def render(*, systems: list[System], show_conductivity: bool) -> None:
 
 
 if __name__ == "__main__":
+    from time import sleep
     print("Sorry, this is a rendering utility file that does not work on its own.")
+    sleep(5)
