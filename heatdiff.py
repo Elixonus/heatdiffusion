@@ -63,12 +63,13 @@ class System:
                 self.elements[gx][gy].temperature += diffusions[gx][gy]
         self.time += delta_time
 
-    def diffusions(self, steps: int, delta_time: float, do_every_step: Callable[[float], None]) -> None:
+    def diffusions(self, steps: int, delta_time: float, do_every_step: Callable[[float], None] = None) -> None:
         for n in range(steps):
             self.diffuse(delta_time)
-        do_every_step(self.time)
+            if do_every_step is not None:
+                do_every_step(self.time)
 
-    def diffuses(self, time: float, steps: int, do_every_step: Callable[[float], None]) -> None:
+    def diffuses(self, time: float, steps: int, do_every_step: Callable[[float], None] = None) -> None:
         delta_time = time / steps
         self.diffusions(steps, delta_time, do_every_step)
 
