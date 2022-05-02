@@ -8,7 +8,7 @@ system.rectangle(center=(0.3, 0.3), size=(0.1, 0.1), temperature=700, conductivi
 system_start = system.save()
 
 
-system.diffusions(steps=50, delta_time=0.01)
+system.diffuses(time=0.03, steps=100)
 
 
 render(systems=[system_start, system],
