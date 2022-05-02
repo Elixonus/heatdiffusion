@@ -3,7 +3,10 @@ from heatdiffusion import System
 
 
 def render(*, systems: list[System], show_conductivity: bool) -> None:
-    print("Plotting temperature and conductivity maps...")
+    if not show_conductivity:
+        print("Plotting temperature maps...")
+    else:
+        print("Plotting temperature and conductivity maps...")
     temperatures = []
     for system in systems:
         temperature = [[system.elements[x][y].temperature
@@ -37,4 +40,5 @@ def render(*, systems: list[System], show_conductivity: bool) -> None:
         ax.set_ylabel("Vertical displacement (meters)")
         cbar = plt.colorbar(im)
         cbar.set_label("Temperature (Kelvin)")
+    print("Done displaying results...")
     plt.show()
