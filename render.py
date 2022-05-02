@@ -3,6 +3,7 @@ from heatdiff import System
 
 
 def render(*, systems: list[System], show_conductivity: bool) -> None:
+    print("Plotting temperature and conductivity maps...")
     temperatures = []
     for system in systems:
         temperature = [[system.elements[x][y].temperature

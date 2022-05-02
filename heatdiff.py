@@ -64,6 +64,7 @@ class System:
         self.time += delta_time
 
     def diffusions(self, steps: int, delta_time: float, do_every_step: Callable[[float], None] = None) -> None:
+        print("Solving heat conduction equation...")
         for n in range(steps):
             self.diffuse(delta_time)
             if do_every_step is not None:
