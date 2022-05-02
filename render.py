@@ -13,24 +13,20 @@ def render(*, systems: list[System], show_conductivity: bool) -> None:
                         for x in range(system.grid[0])]
                        for y in range(system.grid[1])]
         temperatures.append(temperature)
-    conductivities = []
-    for system in systems:
+
+    if show_conductivity and len(systems) > 0:
+        system = systems[0]
         conductivity = [[system.elements[x][y].conductivity
                          for x in range(system.grid[0])]
                         for y in range(system.grid[1])]
-        conductivities.append(conductivity)
+        fig, ax = plt.subplots()
+        im = ax.imshow(conductivity, origin="lower", extent=(0, system.size[0], 0, system.size[1]), cmap="gray_r")
+        ax.set_title(f"Map of conductivity coefficients")
+        ax.set_xlabel("Horizontal displacement (meters)")
+        ax.set_ylabel("Vertical displacement (meters)")
+        cbar = plt.colorbar(im)
+        cbar.set_label("Conductivity coefficient")
 
-    if show_conductivity:
-        for t, conductivity in reversed(list(enumerate(conductivities))):
-            system = systems[t]
-            fig, ax = plt.subplots()
-            im = ax.imshow(conductivity, origin="lower", extent=(0, system.size[0], 0, system.size[1]))
-            ax.set_title(f"Map of conductivity coefficients at time t={system.time:.4f} sec")
-            ax.set_xlabel("Horizontal displacement (meters)")
-            ax.set_ylabel("Vertical displacement (meters)")
-            cbar = plt.colorbar(im)
-            cbar.set_label("Conductivity coefficient")
-            break
     for t, temperature in reversed(list(enumerate(temperatures))):
         system = systems[t]
         fig, ax = plt.subplots()
@@ -42,3 +38,7 @@ def render(*, systems: list[System], show_conductivity: bool) -> None:
         cbar.set_label("Temperature (Kelvin)")
     print("Done displaying results...")
     plt.show()
+
+
+if __name__ == "__main__":
+    print("Sorry, this is a rendering utility file that does not work on its own.")

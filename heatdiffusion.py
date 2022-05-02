@@ -130,3 +130,7 @@ class Element:
         conductivity = (self.conductivity + element.conductivity) / 2
         rate = (conductivity * area * temperature_difference) / distance
         return rate * delta_time
+
+
+if __name__ == "__main__":
+    print("Sorry, this is a library utility file that does not work on its own.")

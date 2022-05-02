@@ -1,6 +1,9 @@
 from heatdiffusion import System
 from render import render
+from time import sleep
 
+print("This script will simulate the heat transfer of two bars connected by a bridge of higher conductivity.")
+sleep(3)
 print("Solving heat conduction equation...")
 system = System(grid=(100, 100), size=(1, 1), temperature=300, conductivity=80)
 system.rectangle(center=(0.5, 0.3), size=(0.3, 0.1), temperature=1000)
