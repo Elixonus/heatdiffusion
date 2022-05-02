@@ -7,14 +7,14 @@ def render(*, systems: list[System], show_conductivity: bool) -> None:
     temperatures = []
     for system in systems:
         temperature = [[system.elements[x][y].temperature
-                        for y in range(system.grid[1])]
-                       for x in range(system.grid[0])]
+                        for x in range(system.grid[0])]
+                       for y in range(system.grid[1])]
         temperatures.append(temperature)
     conductivities = []
     for system in systems:
         conductivity = [[system.elements[x][y].conductivity
-                         for y in range(system.grid[1])]
-                        for x in range(system.grid[0])]
+                         for x in range(system.grid[0])]
+                        for y in range(system.grid[1])]
         conductivities.append(conductivity)
 
     if show_conductivity:
@@ -27,6 +27,7 @@ def render(*, systems: list[System], show_conductivity: bool) -> None:
             ax.set_ylabel("Vertical displacement (meters)")
             cbar = plt.colorbar(im)
             cbar.set_label("Conductivity coefficient")
+            break
     for t, temperature in reversed(list(enumerate(temperatures))):
         system = systems[t]
         fig, ax = plt.subplots()

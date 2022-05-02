@@ -108,6 +108,11 @@ class System:
                     if conductivity is not None:
                         element.conductivity = conductivity
 
+    def ring(self, center: tuple[float, float], radius_center: float, thickness: float, temperature: float = None, conductivity: float = None) -> None:
+        radius_outer = radius_center + thickness / 2
+        radius_inner = radius_center - thickness / 2
+        self.donut(center, radius_outer, radius_inner, temperature, conductivity)
+
     def save(self) -> System:
         return deepcopy(self)
 

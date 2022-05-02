@@ -3,7 +3,7 @@ from render import render
 
 print("Solving heat conduction equation...")
 system = System(grid=(100, 100), size=(1, 1), temperature=300, conductivity=80)
-system.rectangle(center=(0.5, 0.4), size=(0.4, 0.1), temperature=700)
+system.rectangle(center=(0.5, 0.4), size=(0.3, 0.1), temperature=1000)
 system.rectangle(center=(0.5, 0.6), size=(0.4, 0.1), temperature=700)
 system_0 = system.save()
 system.diffuses(time=0.03, steps=50)
