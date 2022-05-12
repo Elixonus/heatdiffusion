@@ -1,6 +1,11 @@
 # heatdiffusion
 Heat transfer/diffusion simulation with conduction through uniform 2D mesh.
 
+## Usage
+```pip install -r requirements.txt```
+
+```python hd_(example)``` where **(example)** is the remainder file name of the program you want to run.
+
 ## Description
 A rectangle of conducting material of size (x, y) in meters diffuses and temperature fluctuates based on the initial setup.
 
