@@ -1,4 +1,4 @@
-# heatdiffusion
+# heatdiffusion 🥵
 Heat transfer/diffusion simulation with conduction through uniform 2D mesh.
 
 ![Fourier's Law](gallery/equation.png)
