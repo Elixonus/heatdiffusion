@@ -1,14 +1,21 @@
 # heatdiffusion 🥵
+
 Heat transfer/diffusion simulation with conduction through uniform 2D mesh.
 
 ![Fourier's Law](gallery/equation.png)
 
 ## Usage
-```pip install -r requirements.txt```
 
-```python hd_(example)``` where **(example)** is the remainder file name of the program you want to run.
+```
+pip install -r requirements.txt
+```
+```
+python hd_example
+```
+where `example` is the remainder file name of the program you want to run.
 
 ## Description
+
 A rectangle of conducting material of size (x, y) in meters diffuses and temperature fluctuates based on the initial setup.
 
 The rectangle is subdivided into a grid of (m, n) where each sub-rectangle is assumed as isothermal and is interacting with its four neighbors.
@@ -20,7 +27,9 @@ Each element of the mesh (m, n) is assigned an initial temperature and conductiv
 Temperature may be modified from outside the system by the user but this will mean the energy of the system changes.
 
 ## Gallery
+
 ### Cooling Bars
+
 Two bars filled in with the same temperature cool down with time.
 
 ![Cooling Bars 1](gallery/cooling_bars/1.png)
@@ -29,6 +38,7 @@ Two bars filled in with the same temperature cool down with time.
 ![Cooling Bars 4](gallery/cooling_bars/4.png)
 
 ### Source Rings
+
 Concentric rings are given a temperature that remains constant as the simulation moves on.
 
 ![Source Rings Inside 1](gallery/source_rings_inside/1.png)
