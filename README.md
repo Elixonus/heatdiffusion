@@ -10,9 +10,9 @@ Heat transfer/diffusion simulation with conduction through uniform 2D mesh.
 pip install -r requirements.txt
 ```
 ```
-python hd_example
+python heatdiffusion/<hd_example>
 ```
-where `example` is the remainder file name of the program you want to run.
+where `<hd_example>` is the remainder file name of the program you want to run.
 
 ## Description
 
