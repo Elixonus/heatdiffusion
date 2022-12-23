@@ -1,8 +1,2 @@
-pip~=22.0.4
-toml~=0.10.2
-tornado~=6.1
-setuptools~=58.1.0
-Cython~=0.29.27
-future~=0.18.2
-docutils~=0.17.1
-matplotlib~=3.5.2
+matplotlib
+PyQt5
