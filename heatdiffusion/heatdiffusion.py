@@ -18,7 +18,7 @@ class System:
         self.time = 0
 
     def diffuse(self, delta_time: float) -> None:
-        diffusions = [[0 for gy in range(self.grid[1])] for gx in range(self.grid[0])]
+        diffusions = [[0. for gy in range(self.grid[1])] for gx in range(self.grid[0])]
         for gx in range(self.grid[0]):
             for gy in range(self.grid[1]):
                 element = self.elements[gx][gy]
@@ -63,20 +63,20 @@ class System:
                 self.elements[gx][gy].temperature += diffusions[gx][gy]
         self.time += delta_time
 
-    def diffusions(self, steps: int, delta_time: float, do_every_step: Callable[[float], None] = None) -> None:
+    def diffusions(self, steps: int, delta_time: float, do_every_step: Callable[[float], None] | None = None) -> None:
         for n in range(steps):
             self.diffuse(delta_time)
             if do_every_step is not None:
                 do_every_step(self.time)
 
-    def diffuses(self, time: float, steps: int, do_every_step: Callable[[float], None] = None) -> None:
+    def diffuses(self, time: float, steps: int, do_every_step: Callable[[float], None] | None = None) -> None:
         delta_time = time / steps
         self.diffusions(steps, delta_time, do_every_step)
 
-    def square(self, center: tuple[float, float], size: float, temperature: float = None, conductivity: float = None) -> None:
+    def square(self, center: tuple[float, float], size: float, temperature: float | None = None, conductivity: float | None = None) -> None:
         self.rectangle(center, (size, size), temperature, conductivity)
 
-    def rectangle(self, center: tuple[float, float], size: tuple[float, float], temperature: float = None, conductivity: float = None) -> None:
+    def rectangle(self, center: tuple[float, float], size: tuple[float, float], temperature: float | None = None, conductivity: float | None = None) -> None:
         left = center[0] - size[0] / 2
         right = center[0] + size[0] / 2
         down = center[1] - size[1] / 2
@@ -92,10 +92,10 @@ class System:
                     if conductivity is not None:
                         element.conductivity = conductivity
 
-    def circle(self, center: tuple[float, float], radius: float, temperature: float = None, conductivity: float = None) -> None:
+    def circle(self, center: tuple[float, float], radius: float, temperature: float | None = None, conductivity: float | None = None) -> None:
         self.donut(center, radius, 0, temperature, conductivity)
 
-    def donut(self, center: tuple[float, float], radius_outer: float, radius_inner: float, temperature: float = None, conductivity: float = None) -> None:
+    def donut(self, center: tuple[float, float], radius_outer: float, radius_inner: float, temperature: float | None = None, conductivity: float | None = None) -> None:
         for gx in range(self.grid[0]):
             for gy in range(self.grid[1]):
                 x = self.size[0] * (gx / (self.grid[0] - 1))
@@ -108,7 +108,7 @@ class System:
                     if conductivity is not None:
                         element.conductivity = conductivity
 
-    def ring(self, center: tuple[float, float], radius_center: float, thickness: float, temperature: float = None, conductivity: float = None) -> None:
+    def ring(self, center: tuple[float, float], radius_center: float, thickness: float, temperature: float | None = None, conductivity: float | None = None) -> None:
         radius_outer = radius_center + thickness / 2
         radius_inner = radius_center - thickness / 2
         self.donut(center, radius_outer, radius_inner, temperature, conductivity)
