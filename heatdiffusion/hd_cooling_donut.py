@@ -8,5 +8,4 @@ system_0 = system.save()
 system.diffuses(time=0.05, steps=50)
 system_1 = system.save()
 system.diffuses(time=0.1, steps=100)
-render(systems=[system_0, system_1, system],
-       show_conductivity=False)
+render(systems=[system_0, system_1, system], show_conductivity=False)

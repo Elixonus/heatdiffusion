@@ -16,5 +16,4 @@ system_1 = system.save()
 system.diffuses(time=0.03, steps=50, do_every_step=apply_boundary)
 system_2 = system.save()
 system.diffuses(time=0.1, steps=100, do_every_step=apply_boundary)
-render(systems=[system_0, system_1, system_2, system],
-       show_conductivity=False)
+render(systems=[system_0, system_1, system_2, system], show_conductivity=False)
