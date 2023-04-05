@@ -189,3 +189,16 @@ if __name__ == "__main__":
 
     print("Sorry, this is a library utility file that does not work on its own.")
     sleep(5)
+else:
+    print(r"""
+        )             )    (       (    (     
+     ( /(   (    ) ( /(    )\ ) (  )\ ) )\ )  
+     )\()) ))\( /( )\())  (()/( )\(()/((()/(  
+    ((_)\ /((_)(_)|_))/    ((_)|(_)/(_))/(_)) 
+    | |(_|_))((_)_| |_     _| | (_|_) _(_) _| 
+    | ' \/ -_) _` |  _|  / _` | | ||  _||  _| 
+    |_||_\___\__,_|\__|  \__,_| |_||_|  |_|   
+    
+    Heat transfer/diffusion simulation with
+    conduction through uniform 2D mesh.
+    """)
