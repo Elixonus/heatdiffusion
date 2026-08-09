@@ -1,4 +1,4 @@
-# heatdiffusion 🥵
+# heatdiffusionvisualizer 🥵
 
 Heat transfer/diffusion simulation with conduction through uniform 2D mesh.
 
@@ -10,7 +10,7 @@ Heat transfer/diffusion simulation with conduction through uniform 2D mesh.
 pip install -r requirements.txt
 ```
 ```
-python heatdiffusion/<hd_example>
+python heatdiffusionvisualizer/<hd_example>
 ```
 where `<hd_example>` is the remainder file name of the program you want to run.
 
